@@ -1,5 +1,35 @@
 const products = [
   {
+    id: "4jfhg48ce-7fj1-4u85-5jgf-fjc75egkv7fm",
+    image: "images/products/umbrella.jpg",
+    name: "Cool Black Umbrella",
+    rating: {
+      stars: 3.5,
+      count: 25
+    },
+    priceCents: 1200,
+    keywords: [
+      "socks",
+      "sports",
+      "apparel"
+    ]
+  },
+  {
+    id: "e432348ce-6cd1-4e85-gg2f-fjc75eb678c6",
+    image: "images/products/backpack.jpg",
+    name: "Cool Backpack",
+    rating: {
+      stars: 5,
+      count: 195
+    },
+    priceCents: 2130,
+    keywords: [
+      "socks",
+      "sports",
+      "apparel"
+    ]
+  },
+  {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
     name: "Black and Gray Athletic Cotton Socks - 6 Pairs",
