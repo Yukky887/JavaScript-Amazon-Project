@@ -1,4 +1,4 @@
-export const cart = [{
+export let cart = [{
 	productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
 	quantity: 2
 }, {
@@ -19,7 +19,8 @@ export function addToCart(productId) {
 
     const addedToCart = document.querySelector(`.js-added-to-cart-${productId}`)
     const selectedQuantity = document.querySelector(`.js-quantity-selector-${productId}`)
-    
+
+	console.log(selectedQuantity.value)
 
     addedToCart.classList.add('added-message');
 
@@ -30,11 +31,23 @@ export function addToCart(productId) {
     }, 2000);
 
     if(matchingItem) {
-        matchingItem.quantity += 1;
+        matchingItem.quantity++;
     } else {
         cart.push({
             productId,
             quantity: Number(selectedQuantity.value)
         });
     }
+}
+
+export function removeFromCart(productId) {
+	const newCart = [];
+
+	cart.forEach((cartItem) => {
+		if (cartItem.productId !== productId) {
+			newCart.push(cartItem);
+		}
+	});
+
+	cart = newCart
 }
