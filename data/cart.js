@@ -6,6 +6,8 @@ export const cart = [{
 	quantity: 1
 }];
 
+let addedTimer;
+
 export function addToCart(productId) {
     let matchingItem;
 
