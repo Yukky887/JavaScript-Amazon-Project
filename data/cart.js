@@ -28,8 +28,6 @@ export function addToCart(productId) {
     const addedToCart = document.querySelector(`.js-added-to-cart-${productId}`)
     const selectedQuantity = document.querySelector(`.js-quantity-selector-${productId}`)
 
-	console.log(selectedQuantity.value)
-
     addedToCart.classList.add('added-message');
 
     clearTimeout(addedTimer);
@@ -62,4 +60,30 @@ export function removeFromCart(productId) {
 	cart = newCart
 
 	saveToStorage();
+}
+
+export function calculateCartQuantity() {
+    let cartQuantity = 0;
+    
+    cart.forEach((cartItem) => {
+        cartQuantity += cartItem.quantity;
+    });
+
+    return cartQuantity;
+}
+
+export function updateQuantity(productId, newQuantity) {
+    console.log(newQuantity);
+    if (newQuantity <= 0 || newQuantity >= 1000) return console.log("Invalid quantity")
+
+    cart.forEach((cartItem) => {
+        if ( cartItem.productId == productId) {
+            cartItem.quantity = Number(newQuantity);
+        }
+
+        cart.quantity = cartItem.quantity;
+    });
+    
+    console.log(cart);
+    saveToStorage();
 }
