@@ -5,6 +5,21 @@ import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js';
 import {renderPaymentSummery} from "./paymentSummary.js";
 
+const today = dayjs();
+const deliveryDate = today.subtract(4, "days");
+const dateString = deliveryDate.format('dddd');
+console.log(dateString);
+
+
+function isWeekend(dateString) {
+	console.log(dateString);
+
+	return dateString === 'Saturday' || dateString === 'Sunday';
+}
+
+if (isWeekend(dateString)) {
+	console.log("It's the weekend!");
+}
 export function renderOrderSummary() {
 	let cartSummeryHTML = '';
 	
@@ -133,8 +148,8 @@ export function renderOrderSummary() {
 	
 				const quantity = container.querySelector('.quantity-input')
 				updateQuantity(productId, quantity.value);
-	
 				checkout();
+				renderPaymentSummery();
 				container.querySelector('.quantity-label')
 					.innerHTML = quantity.value;
 				container.classList.remove('is-editing-quantity');
@@ -150,8 +165,7 @@ export function renderOrderSummary() {
 	
 			checkout();
 	
-			const container = document.querySelector(`.js-cart-item-container-${productId}`);
-			container.remove();
+			renderOrderSummary();
 
 			renderPaymentSummery();
 		});
