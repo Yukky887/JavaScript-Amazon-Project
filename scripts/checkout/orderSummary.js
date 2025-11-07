@@ -19,7 +19,7 @@ export function renderOrderSummary() {
 		const dateString = calculateDeliveryDate(deliveryOption);
 	
 		cartSummeryHTML += `
-			<div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
+			<div class="cart-item-container js-cart-item-container js-cart-item-container-${matchingProduct.id}">
 				<div class="delivery-date">
 					Delivery date: ${dateString}
 				</div>
