@@ -1,3 +1,5 @@
+import {formatCurrency} from '../scripts/utils/money.js';
+
 export function getProduct(productId) {
   let matchingProduct;
 	
@@ -9,6 +11,47 @@ export function getProduct(productId) {
 
   return matchingProduct;
 }
+
+class Product {
+  id;
+  image;
+  name;
+  rating;
+  priceCents;
+
+  constructor(productDetails) {
+    this.id = productDetails.id;
+    this.image = productDetails.image;
+    this.name = productDetails.name;
+    this.rating = productDetails.rating;
+    this.priceCents = productDetails.priceCents;
+    this.keywords = productDetails.keywords;
+  }
+
+  getStarsUrl() {
+    return `images/ratings/rating-${this.rating.stars * 10}.png`;
+  }
+
+  getPrice( ) {
+    return `${formatCurrency(this.priceCents)}`
+  }
+}
+
+const product1 = new Product({
+    id: "4jfhg48ce-7fj1-4u85-5jgf-fjc75egkv7fm",
+    image: "images/products/umbrella.jpg",
+    name: "Cool Black Umbrella",
+    rating: {
+      stars: 3.5,
+      count: 25
+    },
+    priceCents: 1200,
+    keywords: [
+      "socks",
+      "sports",
+      "apparel"
+    ]
+  });
 
 export const products = [
   {
@@ -699,4 +742,6 @@ export const products = [
       "mens"
     ]
   }
-];
+].map((productDetails) => {
+  return new Product(productDetails);
+});
