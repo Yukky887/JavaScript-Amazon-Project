@@ -219,6 +219,30 @@ export function loadProducts(fun) {
   xhr.send();
 }
 
+const xhr = new XMLHttpRequest('GET', 'https://supersimplebackend.dev/greeting')
+console.log(xhr.response);
+
+export function postResponse () {
+  const response = fetch('https://supersimplebackend.dev/greeting', {
+    method: 'POST',
+    headers:{
+      "Content-Type": 'application/json'
+    },
+    body: JSON.stringify({name: 'Egor'})
+  })
+  return response.then((res) => {
+    return res.text();
+  });
+}
+
+export function getRequest () {
+  return fetch('https://supersimplebackend.dev/greeting')
+    .then((response) => {
+      return response.text();
+    });
+} 
+
+
 /*
 export const products = [
   {

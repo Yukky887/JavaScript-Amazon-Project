@@ -116,14 +116,23 @@ export function updateDeliveryOption(productId, deliveryOptionId) {
     saveToStorage();
 }
 
-export function loadCart(fun) {
-  const xhr = new XMLHttpRequest();
+// export function loadCart(fun) {
+//   const xhr = new XMLHttpRequest();
 
-  xhr.addEventListener('load', () => {
-    console.log(xhr.response)
-    fun();
-  });
+//   xhr.addEventListener('load', () => {
+//     fun();
+//   });
 
-  xhr.open('GET', 'https://supersimplebackend.dev/cart');
-  xhr.send();
+//   xhr.open('GET', 'https://supersimplebackend.dev/cart');
+//   xhr.send();
+// }
+
+export function loadCartFetch() {
+    return fetch('https://supersimplebackend.dev/cart')
+        .then((response) => {
+            console.log('Cart loaded via fetch');
+            return response.text();
+        }).catch((error) => {
+            console.log('Error loading cart via fetch', error);
+        });
 }

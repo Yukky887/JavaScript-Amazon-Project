@@ -1,26 +1,27 @@
 import {renderOrderSummary} from './checkout/orderSummary.js';
 import {renderPaymentSummery} from './checkout/paymentSummary.js';
-import { loadProducts, loadProductsFetch } from '../data/products.js';
+import { loadProducts, loadProductsFetch, getRequest, postResponse } from '../data/products.js';
 import '../data/car.js';
 //import '../data/backend-practice.js';
-import { loadCart } from '../data/cart.js';
+import { loadCart, loadCartFetch } from '../data/cart.js';
 
 async function loadPage() {
 	try {
 		// throw 'error1';
 
-		await loadProductsFetch();
+		await loadProductsFetch()
+		await loadCartFetch()
 	
-		const value = await new Promise((resolve, reject) => {
-			// throw 'error2'
-			loadCart(() => {
-				// reject('error3');
-				resolve('value3');
-			});
-		});
+		// const value = await new Promise((resolve, reject) => {
+		// 	// throw 'error2'
+		// 	loadCart(() => {
+		// 		// reject('error3');
+		// 		resolve('value3');
+		// 	});
+		// });
 
 	} catch (error) {
-		console.log('Error. Try again');
+		console.log('Error. Try again', error);
 	}
 	
 	renderOrderSummary();
@@ -29,6 +30,14 @@ async function loadPage() {
 	return 'value2';
 }
 loadPage();
+
+async function getReq() {
+	const result = await getRequest();
+	const post = await postResponse();
+	console.log(result, post);
+}
+getReq();
+
 
 // Promise.all([
 // 	loadProductsFetch(),

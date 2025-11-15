@@ -57,7 +57,6 @@ class SportCar extends Car {
 const car = new Car("Bmw", 'e34')
 const sportCar = new SportCar("Porsche", "911-GT3")
 car.openTrunk();
-car.displayInfo();
 
 sportCar.go();
 sportCar.go();
@@ -75,5 +74,3 @@ sportCar.go();
 sportCar.go();
 sportCar.go();
 sportCar.go();
-
-sportCar.displayInfo();
