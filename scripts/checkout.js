@@ -1,9 +1,9 @@
 import {renderOrderSummary} from './checkout/orderSummary.js';
 import {renderPaymentSummery} from './checkout/paymentSummary.js';
-import { loadProducts, loadProductsFetch, getRequest, postResponse } from '../data/products.js';
+import { loadProductsFetch, getRequest, postResponse } from '../data/products.js';
 import '../data/car.js';
 //import '../data/backend-practice.js';
-import { loadCart, loadCartFetch } from '../data/cart.js';
+import { loadCartFetch } from '../data/cart.js';
 
 async function loadPage() {
 	try {
