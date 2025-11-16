@@ -1,6 +1,6 @@
 import	{cart} from '../../data/cart.js';
 import { getProduct } from '../../data/products.js';
-import { getDeliveryOption } from '../../data/deliveryOptions.js';
+import { getDeliveryOption, calculateDeliveryDate } from '../../data/deliveryOptions.js';
 import {formatCurrency} from '../utils/money.js'
 import {addOrder} from '../../data/orders.js'
 
@@ -16,6 +16,7 @@ export function renderPaymentSummery() {
 
 		const deliveryOption = getDeliveryOption(cartItem.deliveryOptionId)
 		shippingPriceCents += deliveryOption.priceCents
+    const dateString = calculateDeliveryDate(deliveryOption);
 	});
 
 	const totalBeforeTaxCents = shippingPriceCents + productPriceCents;

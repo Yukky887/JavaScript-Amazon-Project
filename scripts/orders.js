@@ -2,6 +2,7 @@ import { orders } from '../data/orders.js';
 import {getProduct, loadProducts, loadProductsFetch, products} from "../data/products.js";
 import {deliveryOptions, getDeliveryOption, calculateDeliveryDate} from '../data/deliveryOptions.js';
 import {formatCurrency} from './utils/money.js'
+import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 
 export async function renderOrdersList() {
 	let ordersListHTML = '';
@@ -12,15 +13,9 @@ export async function renderOrdersList() {
 		console.log('Order Item:', orderItem);
 		const orderProducts = orderItem.products;
 		console.log('Order Products:', orderProducts);
-		const productId = orderItem.id;
-		const matchingProduct = getProduct(productId);
-		console.log('Matching Product:', matchingProduct);
 			
-		const deliveryOption = orderItem.orderTime;
-		//const deliveryOption = getDeliveryOption(deliveryOptionId);
-	
+		const deliveryOption = orderItem.orderTime;	
 		const dateString = calculateDeliveryDate(deliveryOption, 'MMMM D');
-		console.log('Delivery Date String:', dateString);
 
 		ordersListHTML += `
 			<div class="order-container">
@@ -61,12 +56,8 @@ function renderProductList(orderProducts) {
 		const productId = productItem.productId;
 		const productInfo = getProduct(productId);
 		console.log('Product Info:', productInfo);
-
-		const deliveryOptionId = productItem.deliveryOptionId;
-		const deliveryOption = getDeliveryOption(deliveryOptionId);
-	
-		const dateString = calculateDeliveryDate(deliveryOption, 'MMMM D');
-
+		console.log('Product Item:', productItem.estimatedDeliveryTime);
+		const dateString = dayjs(productItem.estimatedDeliveryTime).format('MMMM D');
 		productsListHTML += `
 			<div class="product-image-container">
 			<img src="${productInfo.image}">
