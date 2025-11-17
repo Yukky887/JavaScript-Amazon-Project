@@ -14,8 +14,7 @@ export async function renderOrdersList() {
 		const orderProducts = orderItem.products;
 		console.log('Order Products:', orderProducts);
 			
-		const deliveryOption = orderItem.orderTime;	
-		const dateString = calculateDeliveryDate(deliveryOption, 'MMMM D');
+		const dateString = dayjs(orderItem.orderTime).format('MMMM D, YYYY');
 
 		ordersListHTML += `
 			<div class="order-container">
@@ -39,7 +38,7 @@ export async function renderOrdersList() {
 			</div>
 
 			<div class="order-details-grid">
-				${renderProductList(orderProducts)}
+				${renderProductList(orderProducts, orderItem.id)}
 			</div>
 			</div>
 		`
@@ -47,9 +46,11 @@ export async function renderOrdersList() {
 
 	document.querySelector('.js-order-container')
 		.innerHTML = ordersListHTML;
+
+	addTrackPackageListener();
 }
 
-function renderProductList(orderProducts) {
+function renderProductList(orderProducts, orderId) {
 	let productsListHTML = '';
 
 	orderProducts.forEach((productItem) => {
@@ -80,16 +81,30 @@ function renderProductList(orderProducts) {
 			</div>
 
 			<div class="product-actions">
-			<a href="tracking.html?orderId=123&productId=231">
-				<button class="track-package-button button-secondary">
+				<button class="track-package-button button-secondary js-track-package-button"
+					data-order-id="${orderId}"
+					data-product-id="${productId}">
 				Track package
 				</button>
-			</a>
 			</div>
 		`;
 	})
-
+	
+	
 	return productsListHTML;
+	
 }
 
 renderOrdersList();
+
+function addTrackPackageListener() {
+	document.querySelectorAll('.js-track-package-button').forEach(button => {
+		button.addEventListener('click', () => {
+			const orderId = button.dataset.orderId;
+			const productId = button.dataset.productId;
+
+			console.log('Tracking package for Order ID:', orderId, 'Product ID:', productId);
+			window.location.href = `tracking.html?orderId=${orderId}&productId=${productId}`;
+		});
+	});
+}
